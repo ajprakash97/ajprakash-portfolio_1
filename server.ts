@@ -5,6 +5,7 @@ import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
+import * as os from 'os';
 import { AppServerModule } from './src/main.server';
 
 // The Express app is exported so that it can be used by serverless Functions.
@@ -42,6 +43,8 @@ function run(): void {
   // Start up the Node server
   const server = app();
   server.listen(port, () => {
+    console.log(`Process Env --${os.hostname}`)
+    console.log(`Server running at http://${process.env['HOSTNAME']}:3000/`);
     console.log(`Node Express server listening on http://localhost:${port}`);
   });
 }
